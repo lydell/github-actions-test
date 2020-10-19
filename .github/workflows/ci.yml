@@ -22,4 +22,4 @@ jobs:
 
       - name: Run workflow
         run: |
-          node -p "'Oh yes!'"
+          node index.js

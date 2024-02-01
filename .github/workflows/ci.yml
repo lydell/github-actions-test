@@ -14,6 +14,7 @@ jobs:
       with:
         fetch-depth: 2
     - run: |
+        git diff --name-status HEAD^ HEAD
         if git diff --name-status HEAD^ HEAD | grep -q '^A\tfoobar'; then
           gh pr comment $PR --body "✅ PR added foobar* file!"
         else

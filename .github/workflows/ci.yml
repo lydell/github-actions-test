@@ -12,6 +12,7 @@ jobs:
     steps:
     - run: |
         echo The PR was merged
+    - uses: actions/checkout@v4
     - run: gh pr comment $PR --body "Thank you for merging this PR!"
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

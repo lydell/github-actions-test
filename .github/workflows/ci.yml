@@ -15,14 +15,14 @@ jobs:
         fetch-depth: 2
     - run: |
         if git diff --name-status HEAD^ HEAD | grep -P '^A\tfoobar'; then
-          gh pr comment $PR --body "✅ PR added foobar* file!
+          gh pr comment $PR --body '✅ PR added foobar* file!
 
         Here is code block:
 
         ```
         Cool stuff
         ```
-        "
+        '
         else
           gh pr comment $PR --body "❌ No added foobar* files."
         fi

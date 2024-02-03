@@ -1,31 +1,15 @@
 name: Merged
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
 
 jobs:
-  if_merged:
-    # if: github.event.pull_request.merged == true
+  run:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 2
-    - run: |
-        if git diff --name-status HEAD^ HEAD | grep -P '^A\tfoobar'; then
-          gh pr comment $PR --body '✅ PR added foobar* file!
-
-        Here is code block:
-
-        ```
-        Cool stuff
-        ```
-        '
-        else
-          gh pr comment $PR --body "❌ No added foobar* files."
-        fi
+        fetch-depth: 0
+    - run: node --version
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PR: ${{ github.event.pull_request.number }}

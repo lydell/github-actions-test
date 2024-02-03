@@ -10,6 +10,12 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
-    - run: node --version
+    - run: |
+        node --version
+        git switch -c test-auto-pr
+        git rm foobar1.txt
+        git commit -m 'Auto remove'
+        git push --force
+        gh pr create --title 'Auto remove' --body 'Test text'
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -17,7 +17,7 @@ jobs:
         git switch -c test-auto-pr
         git rm foobar1.txt
         git commit -m 'Auto remove'
-        git push --set-upstream --force
+        git push --force --set-upstream origin test-auto-pr
         gh pr create --title 'Auto remove' --body 'Test text'
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

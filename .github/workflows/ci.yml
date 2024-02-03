@@ -15,9 +15,9 @@ jobs:
         git config user.name 'PowerCleanup'
         git config user.email '<>'
         git switch -c test-auto-pr
-        git rm new_file.txt
+        git rm index.js
         git commit -m 'Auto remove'
         git push --force --set-upstream origin test-auto-pr
-        gh pr create --title 'Auto remove' --body 'Test text'
+        gh pr create --title 'Auto remove' --body 'Test text' || true
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

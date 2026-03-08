@@ -7,4 +7,13 @@ jobs:
   tty:
     runs-on: ubuntu-latest
     steps:
-    - run: node -p process.stdout.isTTY
+      - uses: actions/setup-node@v6
+      - run: npm ci --no-audit
+      - name: Passing, no color
+        run: npx elm-test tests/Passing.elm
+      - name: Passing, color
+        run: npx elm-test --color tests/Passing.elm
+      - name: Failing, no color
+        run: npx elm-test tests/Failing.elm
+      - name: Failing, color
+        run: npx elm-test --color tests/Failing.elm

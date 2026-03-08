@@ -14,7 +14,11 @@ jobs:
         run: npx elm-test tests/Passing.elm
       - name: Passing, color
         run: npx elm-test --color tests/Passing.elm
+        env:
+          FORCE_COLOR: 1
       - name: Failing, no color
         run: npx elm-test tests/Failing.elm || true
       - name: Failing, color
         run: npx elm-test --color tests/Failing.elm || true
+        env:
+          FORCE_COLOR: 1

@@ -7,6 +7,7 @@ jobs:
   tty:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
       - run: npm ci --no-audit
       - name: Passing, no color
@@ -14,6 +15,6 @@ jobs:
       - name: Passing, color
         run: npx elm-test --color tests/Passing.elm
       - name: Failing, no color
-        run: npx elm-test tests/Failing.elm
+        run: npx elm-test tests/Failing.elm || true
       - name: Failing, color
-        run: npx elm-test --color tests/Failing.elm
+        run: npx elm-test --color tests/Failing.elm || true

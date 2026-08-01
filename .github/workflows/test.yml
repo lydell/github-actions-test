@@ -14,4 +14,4 @@ jobs:
         with:
           node-version: 26
 
-      - run: node parent.js
+      - run: node run.js

@@ -11,4 +11,4 @@ client.on('data', function (msg) {
   console.log('child got data:', msg);
 });
 
-client.write("Hello from client!\n");
+client.write(`Hello from client! ${process.argv[3]}\n`);

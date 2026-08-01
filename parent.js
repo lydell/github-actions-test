@@ -4,7 +4,8 @@ const readline = require('readline');
 
 const pipeFilename = `/tmp/elm_test-${process.pid}.sock`;
 
-let child;
+const children = [];
+
 const server = net.createServer((socket) => {
   socket.setEncoding('utf8');
   socket.setNoDelay(true);
@@ -20,13 +21,17 @@ const server = net.createServer((socket) => {
   stream.on('line', function (data) {
     console.log('parent got line:', data);
     // socket.write('Reply from parent\n');
-    child.kill();
+    for (const child of children) {
+      child.kill();
+    }
     server.close();
   });
 });
 
 server.on('listening', () => {
-  child = fork('child.js', [pipeFilename]);
+  for (let i = 0; i < 2; i++) {
+    children.push(fork('child.js', [pipeFilename, i]));
+  }
 });
 
 server.listen(pipeFilename);

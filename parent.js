@@ -30,7 +30,11 @@ const server = net.createServer((socket) => {
 
 server.on('listening', () => {
   for (let i = 0; i < 2; i++) {
-    children.push(fork('child.js', [pipeFilename, i]));
+    const child = fork('child.js', [pipeFilename, i]);
+    children.push(child);
+    child.on('close', () => {
+      console.log('child closed');
+    })
   }
 });
 
